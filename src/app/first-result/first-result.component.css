@@ -1,0 +1,15 @@
+.texto{
+    color: grey;
+    font-weight: 900;
+}
+
+.borda{
+    border-width: medium;
+    border-style: solid;
+    border-color: #b71c1c;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}

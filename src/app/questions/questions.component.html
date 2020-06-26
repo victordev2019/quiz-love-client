@@ -1,0 +1,36 @@
+<button id="startModal" type="button" class="btn btn-primary hide-button" (click)="openModal(lgModal)">Create template
+  modal
+</button>
+
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1"
+     role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left">{{this.questions[index].title}}</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form" (submit)="endOfQuestions() ? finish() : continue()">
+          <div class="row">
+            <div class="col-md-8 offset-2 mt-0" *ngFor="let element of this.questions[index].answers">
+              <label for="answer{{element.value}}">
+                <input id="answer{{element.value}}" name="answer" type="radio" formControlName="answer"
+                       value="{{element.value}}"  aria-label="answer">
+                {{element.content}}</label>
+            </div>
+            <div class="col-md-8 offset-2" *ngIf="answerFormControl.invalid && submitted">
+              <span class="invalid-form"> {{labels.INVALID_FORM}} </span>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-8 offset-2">
+              <button type="submit"
+                      class="btn btn-primary">{{endOfQuestions() ? labels.FINISH : labels.CONTINUE}} </button>
+            </div>
+           
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

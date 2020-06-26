@@ -1,0 +1,17 @@
+.margin-top-text {
+  margin-top: 10%;
+}
+
+.invalid-form {
+  color: red;
+}
+
+.hide-button {
+  display: none;
+}
+
+.btn{
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #9932CC;
+}

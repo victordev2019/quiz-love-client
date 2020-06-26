@@ -1,0 +1,13 @@
+.invalid-form {
+  color: red;
+}
+
+.btn{
+  font-size: 15px;
+  font-weight: bold;
+  background-color: #9932CC;
+}
+
+.invisivel{
+  visibility: hidden;
+}

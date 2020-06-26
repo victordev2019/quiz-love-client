@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {FinalAnswer} from './shared/interface/questions.interface';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'untitled1';
+  title = 'Teste de Amor';
+
+  isInQuestion = true;
+
+  public allAnswer: Array<FinalAnswer>;
+
+  showResults(event: Array<FinalAnswer>) {
+    this.allAnswer = event;
+    this.isInQuestion = false;
+  }
 }
