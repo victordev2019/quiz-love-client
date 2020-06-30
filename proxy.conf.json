@@ -1,4 +1,12 @@
+
 {
-    "target": "https://mkt.malutanizaki.com.br",
-    "secure": true
+"/api/": {
+"target": "https://mkt.malutanizaki.com.br",
+"secure": true,
+"logLevel": "debug",
+  "pathRewrite": {
+    "^/api": ""
+  },
+  "changeOrigin": true
+}
 }

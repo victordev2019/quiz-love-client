@@ -26,16 +26,13 @@ import { HttpClientModule } from '@angular/common/http';
     AlertResultComponent,
     QuestionResumeComponent,
     LoadingComponent
-    
-    
   ],
   imports: [
     BrowserModule,
     ModalModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
-
+    HttpClientModule,
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

@@ -1,9 +1,13 @@
 //import { QuizService } from './../shared/quiz.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FinalAnswer } from '../shared/interface/questions.interface';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import { Results, returnResults } from '../shared/interface/results.interface';
 import { QuizService } from '../shared/quiz.service';
+import {consoleTestResultHandler} from "tslint/lib/test";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {LiguagemFormulario} from "./interface";
 //import { QuizService } from '../shared/quiz.service';
 
 
@@ -13,6 +17,9 @@ import { QuizService } from '../shared/quiz.service';
   styleUrls: ['./result-test.component.css']
 })
 export class ResultTestComponent implements OnInit {
+
+  /******************* ATRIBUTOS *******************/
+  formulario: LiguagemFormulario = new LiguagemFormulario();
   public imagemResposta: string;
   public result: Results;
 
@@ -73,7 +80,8 @@ export class ResultTestComponent implements OnInit {
 
   public showComponentsResults = false;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private http: HttpClient) {
   }
 
   ngOnInit(): void {
@@ -181,18 +189,27 @@ export class ResultTestComponent implements OnInit {
 
   }
 
-  showResults() {
-   
-    this.submitted = true;
-    if (this.form.invalid) {
-      return;
-    }
-    this.showComponentsResults = true;
-    document.getElementById("idBotaoInivisilve").onsubmit();
-  }
-  
-    
+  showResults(form: NgForm) {
 
+    this.submitted = true;
+    if (this.formulario.nome !== undefined && this.formulario.nome !== '' ) {
+      this.showComponentsResults = true;
+      var data = new FormData();
+      data.append("mauticform[formName]", "nomeform");
+      data.append("mauticform[return]", "");
+      data.append("mauticform[formId]", "3");
+      data.append("mauticform[nome]", this.formulario.nome);
+
+      this.http.post<any>(`api/form/submit?formId=2`, data).subscribe(data => {
+
+        //todo verificar o tipo de retorno que api retorna e fazer o tratamento !
+        console.log("retorno", data);
+      });
+    } else {
+      alert("Preencha todos os campos obrigatório! ");
+    }
+
+  }
   //requestInsert(): void {
 
   // this.showResults();
@@ -205,19 +222,19 @@ export class ResultTestComponent implements OnInit {
 //"mauticform[linguagem_de_amor_primari]" : this.primaryLanguageFormControl.value,
 //"mauticform[linguagem_desafiadora]" : this.challengeLanguageFormControl.value,
 //"mauticform[demonstracao_de_amor]" : this.loveDemonstrationFormControl.value
-    
+
 
  //  }
-    
+
  //   this.quizService.formulario(data).subscribe(res => {
   //    console.log(res)
   //  })
   //}
-  
 
 
 
- 
+
+
 
   get challengeLanguageFormControl(): AbstractControl {
    return this.form.get('challengeLanguage');
